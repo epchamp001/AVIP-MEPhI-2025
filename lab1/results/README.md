@@ -11,27 +11,27 @@
 Из исходного изображения выделены компоненты R, G и B, и сохранены как отдельные изображения.
 
 - **R_channel.png** - Красный канал
-![R_channel.png](pictures_results/R_channel.png)
+![R_channel.png](../pictures_results/R_channel.png)
 
 - **G_channel.png** - Зеленый канал
-![G_channel.png](pictures_results/G_channel.png)
+![G_channel.png](../pictures_results/G_channel.png)
 
 - **B_channel.png** - Синий канал
-![B_channel.png](pictures_results/B_channel.png)
+![B_channel.png](../pictures_results/B_channel.png)
 
 ### 1.2 Преобразование в модель HSI и сохранение яркостной компоненты
 
 Из исходного изображения был рассчитан яркостной компонент HSI и сохранен как отдельное изображение.
 
 - **I_component.png** - Яркостная компонента
-![I_component.png](pictures_results/I_component.png)
+![I_component.png](../pictures_results/I_component.png)
 
 ### 1.3 Инвертирование яркостной компоненты
 
 Инвертированное изображение яркостной компоненты было сохранено отдельно.
 
 - **I_inverted.png** - Инвертированная яркостная компонента
-![I_inverted.png](pictures_results/I_inverted.png)
+![I_inverted.png](../pictures_results/I_inverted.png)
 
 ## 2. Передискретизация изображений
 
@@ -40,28 +40,28 @@
 Изображение было растянуто в 2 раза с использованием метода ближайшего соседа.
 
 - **stretched_image.png** - Растянутое изображение
-![stretched_image.png](pictures_results/stretched_image.png)
+![stretched_image.png](../pictures_results/stretched_image.png)
 
 ### 2.2 Сжатие изображения (децимация)
 
 Изображение было сжато в 3 раза, уменьшая количество пикселей.
 
 - **compressed_image.png** - Сжатое изображение
-![compressed_image.png](pictures_results/compressed_image.png)
+![compressed_image.png](../pictures_results/compressed_image.png)
 
 ### 2.3 Передискретизация изображения в два прохода
 
 Изображение было сначала растянуто в 2 раза, а затем сжато в 2 раза.
 
 - **resampled_image.png** - Изображение после двух проходов (растяжение и сжатие)
-![resampled_image.png](pictures_results/resampled_image.png)
+![resampled_image.png](../pictures_results/resampled_image.png)
 
 ### 2.4 Передискретизация за один проход
 
 Изображение было передискретизировано в 2 раза за один проход методом ближайшего соседа.
 
 - **one_step_resampled_image.png** - Передискретизация за один проход
-![one_step_resampled_image.png](pictures_results/one_step_resampled_image.png)
+![one_step_resampled_image.png](../pictures_results/one_step_resampled_image.png)
 
 ## Заключение
 
