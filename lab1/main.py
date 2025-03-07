@@ -57,7 +57,7 @@ def stretch_image(image_array, factor):
     return stretched_image
 
 
-stretched_image = stretch_image(image_array, 2)
+stretched_image = stretch_image(image_array, 5)
 Image.fromarray(stretched_image).save('pictures_results/stretched_image.png')
 
 
@@ -74,7 +74,7 @@ def compress_image(image_array, factor):
     return compressed_image
 
 
-compressed_image = compress_image(image_array, 3)
+compressed_image = compress_image(image_array, 5)
 Image.fromarray(compressed_image).save('pictures_results/compressed_image.png')
 
 def resample_image(image_array, M, N):
@@ -82,7 +82,7 @@ def resample_image(image_array, M, N):
     resampled = compress_image(stretched, N)
     return resampled
 
-resampled_image = resample_image(image_array, 2, 2)
+resampled_image = resample_image(image_array, 5, 5)
 Image.fromarray(resampled_image).save('pictures_results/resampled_image.png')
 
 
@@ -99,5 +99,5 @@ def one_step_resample(image_array, factor):
     return resampled_image
 
 
-one_step_resampled_image = one_step_resample(image_array, 2)
+one_step_resampled_image = one_step_resample(image_array, 5)
 Image.fromarray(one_step_resampled_image).save('pictures_results/one_step_resampled_image.png')
