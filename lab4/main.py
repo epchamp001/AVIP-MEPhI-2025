@@ -1,69 +1,8 @@
-# import cv2
-# import numpy as np
-# import os
-# from matplotlib import pyplot as plt
-#
-# G_x = np.array([[3, 10, 3],
-#                 [0, 0, 0],
-#                 [-3, -10, -3]], dtype=np.float32)
-#
-# G_y = np.array([[3, 0, -3],
-#                 [10, 0, -10],
-#                 [3, 0, -3]], dtype=np.float32)
-#
-# input_folder = 'pictures_src'
-# output_folder = 'pictures_results'
-#
-# if not os.path.exists(output_folder):
-#     os.makedirs(output_folder)
-#
-# image_files = [f for f in os.listdir(input_folder) if f.endswith('.png')]
-#
-# for image_file in image_files:
-#     image_path = os.path.join(input_folder, image_file)
-#
-#     image = cv2.imread(image_path)
-#
-#     if image is None:
-#         print(f"Ошибка: Не удалось загрузить изображение {image_file}. Пропускаем.")
-#         continue
-#
-#     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-#
-#     # Применение оператора Шарра
-#     gradient_x = cv2.filter2D(gray_image, -1, G_x)
-#     gradient_y = cv2.filter2D(gray_image, -1, G_y)
-#
-#     gradient = np.sqrt(gradient_x ** 2 + gradient_y ** 2)
-#
-#     if np.isnan(gradient).any() or np.isinf(gradient).any():
-#         gradient = np.nan_to_num(gradient, nan=0.0, posinf=0.0, neginf=0.0)
-#
-#     gradient = gradient.astype(np.float32)
-#
-#     # Нормализация градиента к диапазону 0-255
-#     gradient_normalized = cv2.normalize(gradient, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
-#
-#     # Бинаризация градиента
-#     _, binary_gradient = cv2.threshold(gradient_normalized, 50, 255, cv2.THRESH_BINARY)
-#
-#     base_name = os.path.splitext(image_file)[0]
-#     cv2.imwrite(os.path.join(output_folder, f'{base_name}_gray.png'), gray_image)
-#     cv2.imwrite(os.path.join(output_folder, f'{base_name}_gradient_x.png'), gradient_x)
-#     cv2.imwrite(os.path.join(output_folder, f'{base_name}_gradient_y.png'), gradient_y)
-#     cv2.imwrite(os.path.join(output_folder, f'{base_name}_gradient_normalized.png'), gradient_normalized)
-#     cv2.imwrite(os.path.join(output_folder, f'{base_name}_binary_gradient.png'), binary_gradient)
-#
-#     print(f"Обработано изображение: {image_file}")
-#
-# print("Обработка всех изображений завершена.")
-
 import numpy as np
 from PIL import Image
 import os
 import math
 
-# Операторы Шарра
 G_x = np.array([[3, 10, 3],
                 [0, 0, 0],
                 [-3, -10, -3]], dtype=np.float32)
@@ -72,11 +11,10 @@ G_y = np.array([[3, 0, -3],
                 [10, 0, -10],
                 [3, 0, -3]], dtype=np.float32)
 
-# Функция для преобразования цветного изображения в полутоновое
 def rgb_to_grayscale(image):
     return np.dot(image[..., :3], [0.2989, 0.5870, 0.1140])
 
-# Функция для применения свертки (реализация вручную)
+# Функция для применения свертки
 def apply_convolution(image, kernel):
     kernel_height, kernel_width = kernel.shape
     pad_height = kernel_height // 2
@@ -103,7 +41,6 @@ def normalize_image(image):
 def binarize_image(image, threshold):
     return (image > threshold) * 255
 
-# Папки для входных и выходных данных
 input_folder = 'pictures_src'
 output_folder = 'pictures_results'
 
@@ -112,14 +49,11 @@ if not os.path.exists(output_folder):
 
 image_files = [f for f in os.listdir(input_folder) if f.endswith('.png')]
 
-# Обработка каждого изображения
 for image_file in image_files:
     image_path = os.path.join(input_folder, image_file)
 
-    # Загрузка изображения с помощью PIL
     image = np.array(Image.open(image_path))
 
-    # Преобразование в полутоновое
     gray_image = rgb_to_grayscale(image)
 
     # Применение операторов Шарра
@@ -135,7 +69,6 @@ for image_file in image_files:
     # Бинаризация градиента
     binary_gradient = binarize_image(gradient_normalized, threshold=50)
 
-    # Сохранение результатов
     base_name = os.path.splitext(image_file)[0]
     Image.fromarray(gray_image.astype(np.uint8)).save(os.path.join(output_folder, f'{base_name}_gray.png'))
     Image.fromarray(gradient_x.astype(np.uint8)).save(os.path.join(output_folder, f'{base_name}_gradient_x.png'))
