@@ -30,6 +30,10 @@
 
 ![](../pictures_results/diff_face.bmp)
 
+### Бинаризация
+
+![](../pictures_results/binary_face.bmp)
+
 ### Пример 2
 
 #### Исходное изображение
@@ -43,6 +47,10 @@
 #### Разностное изображение (после фильтрации)
 
 ![](../pictures_results/diff_chess.bmp)
+
+### Бинаризация
+
+![](../pictures_results/binary_chess.bmp)
 
 ### Пример 3
 
@@ -58,6 +66,10 @@
 
 ![](../pictures_results/diff_text.png)
 
+### Бинаризация
+
+![](../pictures_results/binary_text.png)
+
 ### Пример 4
 
 #### Исходное изображение
@@ -71,6 +83,10 @@
 #### Разностное изображение (после фильтрации)
 
 ![](../pictures_results/diff_house.bmp)
+
+### Бинаризация
+
+![](../pictures_results/binary_house.bmp)
 
 ## Выводы
 
