@@ -29,11 +29,21 @@
 - **R_channel.png** - Красный канал
 ![R_channel.png](../pictures_results/R_channel.png)
 
+- **R_component.png** - Красный канал (цветное изображение, только красный компонент)
+![R_component.png](../pictures_results/R_component.png)
+
 - **G_channel.png** - Зеленый канал
 ![G_channel.png](../pictures_results/G_channel.png)
 
+- **G_component.png** - Зеленый канал (цветное изображение, только зеленый компонент)
+![G_component.png](../pictures_results/G_component.png)
+
 - **B_channel.png** - Синий канал
 ![B_channel.png](../pictures_results/B_channel.png)
+
+- **B_component.png** - Синий канал (цветное изображение, только синий компонент)
+![B_component.png](../pictures_results/B_component.png)
+
 
 ### 1.2 Преобразование в модель HSI и сохранение яркостной компоненты
 
