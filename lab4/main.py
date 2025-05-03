@@ -20,10 +20,8 @@ def apply_convolution(image, kernel):
     pad_height = kernel_height // 2
     pad_width = kernel_width // 2
 
-    # Добавляем padding к изображению
     padded_image = np.pad(image, ((pad_height, pad_height), (pad_width, pad_width)), mode='constant')
 
-    # Создаем пустое изображение для результата
     output = np.zeros_like(image)
 
     # Применяем свертку

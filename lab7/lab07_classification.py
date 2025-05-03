@@ -17,23 +17,17 @@ from PIL import Image, ImageDraw
     python lab7_feature_classification.py
 """
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Константы
-# ─────────────────────────────────────────────────────────────────────────────
 
 SRC_PATH     = Path("pictures_src/phrase.bmp")
 ALPHABET_DIR = Path("alphabet")
 DST_DIR      = Path("pictures_results")
 PHRASE_GT    = "БЕРЕГИТЕ В СЕБЕ ЧЕЛОВЕКА"
-SIZE         = (64, 64)               # размер нормализации шаблонов
+SIZE         = (64, 64)
 
 ALPHABET = list("АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ")
 
 os.makedirs(DST_DIR, exist_ok=True)
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Бинаризация и нормализация
-# ─────────────────────────────────────────────────────────────────────────────
 
 def to_binary(img_or_path) -> np.ndarray:
     """Возвращает бинарное изображение 0/1 (1 — чёрный)."""
@@ -64,9 +58,6 @@ def normalize_bin(arr: np.ndarray, size: tuple[int, int] = SIZE) -> np.ndarray:
     res = np.array(pil)
     return (res < 128).astype(np.uint8)
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Сегментация строки
-# ─────────────────────────────────────────────────────────────────────────────
 
 def segment_by_profiles(bin_img: np.ndarray, empty_thresh: int = 1):
     """Возвращает bounding-box'ы символов, без пробелов."""
@@ -122,9 +113,6 @@ def gap_is_space(prev_box, curr_box, ratio=0.5):
     gap = curr_box[0] - prev_box[2]
     return gap > (prev_box[2] - prev_box[0]) * ratio
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Загрузка шаблонов
-# ─────────────────────────────────────────────────────────────────────────────
 
 def load_templates():
     tpls = []
@@ -135,9 +123,6 @@ def load_templates():
         tpls.append(tpl)
     return np.stack(tpls, axis=0), ALPHABET  # shape: (33, 64, 64)
 
-# ─────────────────────────────────────────────────────────────────────────────
-# IoU-метрика
-# ─────────────────────────────────────────────────────────────────────────────
 
 def compute_iou_batch(tpl_stack: np.ndarray, sub: np.ndarray) -> np.ndarray:
     sub_b = sub.astype(bool)
@@ -145,9 +130,6 @@ def compute_iou_batch(tpl_stack: np.ndarray, sub: np.ndarray) -> np.ndarray:
     union = np.logical_or(tpl_stack, sub_b).sum(axis=(1, 2))
     return inter / np.where(union == 0, 1, union)
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Распознавание изображения
-# ─────────────────────────────────────────────────────────────────────────────
 
 def recognise_image(path: Path, tpl_stack: np.ndarray, keys: list[str]):
     bin_img = to_binary(path)
@@ -177,18 +159,11 @@ def recognise_image(path: Path, tpl_stack: np.ndarray, keys: list[str]):
 
     return result, boxes, letters, scores
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Точность
-# ─────────────────────────────────────────────────────────────────────────────
-
 def accuracy(pred: str, gt: str):
     m = max(len(pred), len(gt))
     errs = sum(1 for a, b in zip(pred.ljust(m), gt.ljust(m)) if a != b)
     return errs, 100 * (1 - errs / m)
 
-# ─────────────────────────────────────────────────────────────────────────────
-# main
-# ─────────────────────────────────────────────────────────────────────────────
 
 def main():
     print("[1] Загрузка шаблонов…")
@@ -202,14 +177,12 @@ def main():
     print(f"Эталон     : {PHRASE_GT}")
     print(f"Ошибок     : {errs}/{len(PHRASE_GT)}  |  Точность: {pct:.2f}%")
 
-    # ── сохраняем рамки
     img = Image.open(SRC_PATH).convert("RGB")
     draw = ImageDraw.Draw(img)
     for box in boxes:
         draw.rectangle([(box[0], box[1]), (box[2], box[3])], outline="red", width=1)
     img.save(DST_DIR / "phrase_boxes_fixed.bmp")
 
-    # ── файл с лучшими гипотезами
     hyp_path = DST_DIR / "best_hypotheses.txt"
     with hyp_path.open("w", encoding="utf-8") as f:
         f.write("Выводятся лучшие гипотезы\n\n")

@@ -10,9 +10,8 @@ output_csv_path = 'features.csv'
 
 os.makedirs(profiles_path, exist_ok=True)
 
-# Функция для расчета веса (массы черного) в области
 def calculate_weight(image_array):
-    return np.sum(image_array) / 255  # Нормализация, так как белый = 255, черный = 0
+    return np.sum(image_array) / 255
 
 # Функция для расчета центра тяжести
 def calculate_center_of_mass(image_array):
