@@ -12,13 +12,25 @@
 
 ![voice](../results/spec_i.png)
 
+![voice](../results/f0_i.png)
+
+![voice](../results/peaks_i.png)
+
 ## Спектрограмма Лай
 
 ![voice](../results/spec_dog.png)
 
+![voice](../results/f0_dog.png)
+
+![voice](../results/peaks_dog.png)
+
 ## Спектрограмма А
 
 ![voice](../results/spec_a.png)
+
+![voice](../results/f0_a.png)
+
+![voice](../results/peaks_a.png)
 
 ## Выводы
 

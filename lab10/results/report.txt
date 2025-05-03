@@ -1,15 +1,18 @@
 File: i
 Min freq: 0.0 Hz, Max freq: 7007.8 Hz
-Fundamental (median): 160.6 Hz, Overtones count: 2
+Fundamental (median): 160.6 Hz
+Overtones: 160.6, 321.1
 Formants: 2578.2, 4727.4, 7280.1 Hz
 
 File: dog
 Min freq: 70.3 Hz, Max freq: 1265.6 Hz
-Fundamental (median): 87.3 Hz, Overtones count: 2
+Fundamental (median): 87.3 Hz
+Overtones: 436.6, 523.9
 Formants: 613.4, 5497.6, 9011.3 Hz
 
 File: a
 Min freq: 0.0 Hz, Max freq: 6000.0 Hz
-Fundamental (median): 137.2 Hz, Overtones count: 1
+Fundamental (median): 137.2 Hz
+Overtones: 685.8
 Formants: 827.6, 4798.5, 13786.2 Hz
 
